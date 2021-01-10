@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         wordlist.setOnClickListener {
-            val wordlist = Intent(application,ListActivity::class.java)
+            val wordlist = Intent(application, ListActivity::class.java)
             startActivity(wordlist)
         }
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun wordregistration() {
+    fun wordregistration() {
         val inflater = layoutInflater
         val inflate_view = inflater.inflate(R.layout.custom_view, null)
 
@@ -41,27 +41,28 @@ class MainActivity : AppCompatActivity() {
         val english_text = inflate_view.findViewById(R.id.english_text) as EditText
 
         AlertDialog.Builder(this)
-                .setTitle("単語登録")
-                .setMessage("単語を入力してください")
-                .setView(inflate_view)
-                .setPositiveButton("登録") { _, _ ->
-                    val japanese = japanese_text.text.toString()
-                    val english = english_text.text.toString()
-                    addtext(japanese, english)
-                    Toast.makeText(this, "日本語：${japanese}\n英　語：${english}\n登録完了", Toast.LENGTH_SHORT).show()
-                }
-                .setNegativeButton("キャンセル") { _, _ -> }
-                .show()
+            .setTitle("単語登録")
+            .setMessage("単語を入力してください")
+            .setView(inflate_view)
+            .setPositiveButton("登録") { _, _ ->
+                val japanese = japanese_text.text.toString()
+                val english = english_text.text.toString()
+                addtext(japanese, english)
+                Toast.makeText(this, "日本語：${japanese}\n英　語：${english}\n登録完了", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            .setNegativeButton("キャンセル") { _, _ -> }
+            .show()
     }
 
     private fun addtext(japanese: String, english: String) {
         FirebaseFirestore.getInstance()
-                .collection("word")
-                .add(AddWord().apply {
-                    Japaneseword = japanese
-                    Englishword = english
-                    wordId = wordId
-                })
+            .collection("word")
+            .add(AddWord().apply {
+                Japaneseword = japanese
+                Englishword = english
+                wordId = wordId
+            })
     }
 
 }
