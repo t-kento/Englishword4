@@ -47,6 +47,7 @@ class JapFragment:Fragment() {
             activity?.onBackPressed()
         }
     }
+
     private fun initRecyclerView() {
         japAdapter.callback = object : JapAdapter.JapAdapterCallback {
             override fun onClickDelete(itemVIew: JapAdapter.ListObject) {

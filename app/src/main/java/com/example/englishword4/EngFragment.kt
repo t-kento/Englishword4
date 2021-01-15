@@ -40,8 +40,9 @@ class EngFragment : Fragment() {
 
     private fun initClick() {
         fabEnglish.setOnClickListener {
-            val main = MainActivity()
-            main.wordregistration()
+            (activity as? BaseActivity)?.also { baseActivity ->
+                baseActivity.wordregistration()
+            }
         }
         reEnglish.setOnClickListener {
             activity?.onBackPressed()

@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.list_activity.*
 
-class ListActivity : AppCompatActivity() {
+class ListActivity : BaseActivity() {
 
     private val viewPagerAdapter by lazy { ViewPagerAdapter(this) }
 
