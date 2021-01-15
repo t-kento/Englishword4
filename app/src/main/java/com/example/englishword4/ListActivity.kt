@@ -14,11 +14,17 @@ class ListActivity : AppCompatActivity() {
 
     private val viewPagerAdapter by lazy { ViewPagerAdapter(this) }
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.list_activity)
         initialize()
     }
+
+//    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+//        super.onCreate(savedInstanceState, persistentState)
+//        setContentView(R.layout.list_activity)
+//        initialize()
+
 
     private fun initialize() {
         initLayout()
@@ -44,7 +50,7 @@ class ListActivity : AppCompatActivity() {
     class Item(val fragment: Fragment, val language: String)
 
     class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
-            FragmentStateAdapter(fragmentActivity) {
+        FragmentStateAdapter(fragmentActivity) {
 
         val items: List<Item> = listOf(Item(JapFragment(), "日本語"), Item(EngFragment(), "English"))
 
@@ -52,5 +58,4 @@ class ListActivity : AppCompatActivity() {
 
         override fun createFragment(position: Int): Fragment = items[position].fragment
     }
-
 }

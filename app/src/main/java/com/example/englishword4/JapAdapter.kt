@@ -35,8 +35,8 @@ class JapAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerV
     private fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val itemView = items[position]
         holder.apply {
-            number_text.text="$position+1"
-            edit_text.text = itemView.Japaneseword
+//            number_text.text=""
+//            edit_text.text = itemView.Japaneseword
             deleteButton.setOnClickListener {
 //                callback?.onClickDelete()
             }
