@@ -23,7 +23,7 @@ class JapAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.fragment_jpanese_list, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_jap_list, parent, false)
         )
     }
 
@@ -35,8 +35,8 @@ class JapAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerV
     private fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val itemView = items[position]
         holder.apply {
-//            number_text.text=""
-//            edit_text.text = itemView.Japaneseword
+            number_text.text = "${position + 1}"
+            edit_text.text = itemView.Japaneseword
             deleteButton.setOnClickListener {
 //                callback?.onClickDelete()
             }

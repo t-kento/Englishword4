@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_jpanese_list.*
+import kotlinx.android.synthetic.main.fragmen_english_list.*
 import java.util.*
 
 class EngFragment : Fragment() {
@@ -39,11 +39,11 @@ class EngFragment : Fragment() {
     }
 
     private fun initClick() {
-        fab.setOnClickListener {
+        fabEnglish.setOnClickListener {
             val main = MainActivity()
             main.wordregistration()
         }
-        re.setOnClickListener {
+        reEnglish.setOnClickListener {
             activity?.onBackPressed()
         }
     }
@@ -54,7 +54,7 @@ class EngFragment : Fragment() {
 //                deleteWord()
             }
         }
-        memoRecyclerView.apply {
+        englishRecyclerView.apply {
             adapter = engAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
