@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragmen_english_list.*
 import kotlinx.android.synthetic.main.fragment_jpanese_list.*
 import java.util.*
 
@@ -39,29 +40,30 @@ class EngFragment : Fragment() {
     }
 
     private fun initClick() {
-        fab.setOnClickListener {
-            val main = MainActivity()
-            main.wordregistration()
+        fabEnglish.setOnClickListener {
+            (activity as? BaseActivity)?.also {
+                it.wordregistration()
+            }
         }
-        re.setOnClickListener {
+        reEnglish.setOnClickListener {
             activity?.onBackPressed()
         }
     }
 
     private fun initRecyclerView() {
         engAdapter.callback = object : EngAdapter.EngAdapterCallback {
-            override fun onClickDelete(itemVIew: EngAdapter.ListObject) {
-//                deleteWord()
+            override fun onClickDelete(itemView: AddWord) {
+                deleteWord(itemView)
             }
         }
-        memoRecyclerView.apply {
+        EnglishRecyclerView.apply {
             adapter = engAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
     private fun initSwipeRefreshLayout() {
-        swipeRefreshLayout.setOnRefreshListener {
+        engSwipeRefreshLayout.setOnRefreshListener {
             initData()
         }
     }
@@ -72,7 +74,7 @@ class EngFragment : Fragment() {
             .orderBy(AddWord::createdAt.name)
             .get()
             .addOnCompleteListener {
-                swipeRefreshLayout.isRefreshing = false
+                engSwipeRefreshLayout.isRefreshing = false
                 if (!it.isSuccessful)
                     return@addOnCompleteListener
                 var date = Date()
@@ -81,6 +83,13 @@ class EngFragment : Fragment() {
                     date = word.lastOrNull()?.createdAt ?: Date()
                 }
             }
+    }
+
+    private fun deleteWord(itemView:AddWord){
+        FirebaseFirestore.getInstance()
+            .collection("word")
+            .document("${itemView.Japaneseword}")
+            .delete()
     }
 
 }

@@ -26,7 +26,7 @@ class EngAdapter (private val context: Context?) : RecyclerView.Adapter<Recycler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.fragmen_english_list, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_eng_list, parent, false)
         )
     }
 
@@ -38,10 +38,10 @@ class EngAdapter (private val context: Context?) : RecyclerView.Adapter<Recycler
     private fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val itemView = items[position]
         holder.apply {
-            number_text.text="$position+1"
+            number_text.text="${position+1}"
             edit_text.text = itemView.Englishword
             deleteButton.setOnClickListener {
-//                callback?.onClickDelete()
+                callback?.onClickDelete(itemView)
             }
         }
     }
@@ -55,11 +55,8 @@ class EngAdapter (private val context: Context?) : RecyclerView.Adapter<Recycler
     }
 
     interface EngAdapterCallback {
-        fun onClickDelete(itemVIew: ListObject)
+        fun onClickDelete(itemView: AddWord)
     }
 
-    open class ListObject {
-        val number_text = ""
-        val edit_text = ""
-    }
+
 }

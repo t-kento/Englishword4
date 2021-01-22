@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FieldValue.delete
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.util.FileUtil.delete
 import kotlinx.android.synthetic.main.fragment_jpanese_list.*
+import java.nio.file.Files.delete
 import java.util.*
 
 class JapFragment:Fragment() {
@@ -36,21 +39,23 @@ class JapFragment:Fragment() {
         initClick()
         initRecyclerView()
         initSwipeRefreshLayout()
+        getSwipeToDismissTouchHelpe()
     }
 
     private fun initClick(){
-        fab.setOnClickListener{
-            val main = MainActivity() 
-            main.wordregistration()
+        fabJapanese.setOnClickListener{
+            (activity as? BaseActivity)?.also{
+                it.wordregistration()
+            }
         }
-        re.setOnClickListener{
+        reJapanese.setOnClickListener{
             activity?.onBackPressed()
         }
     }
     private fun initRecyclerView() {
         japAdapter.callback = object : JapAdapter.JapAdapterCallback {
-            override fun onClickDelete(itemVIew: JapAdapter.ListObject) {
-//                deleteWord()
+            override fun onClickDelete(itemView: AddWord) {
+                deleteWord(itemView)
             }
         }
         memoRecyclerView.apply {
@@ -59,17 +64,28 @@ class JapFragment:Fragment() {
         }
     }
     private fun initSwipeRefreshLayout() {
-        swipeRefreshLayout.setOnRefreshListener {
+        japSwipeRefreshLayout.setOnRefreshListener {
             initData()
         }
     }
+
+    private fun getSwipeToDismissTouchHelpe(){
+        japAdapter.callback = object : JapAdapter.JapAdapterCallback{
+        }
+    }
+
+
+
+
+
+
     private fun initData() {
         FirebaseFirestore.getInstance()
             .collection("word")
             .orderBy(AddWord::createdAt.name)
             .get()
             .addOnCompleteListener {
-                swipeRefreshLayout.isRefreshing = false
+                japSwipeRefreshLayout.isRefreshing = false
                 if (!it.isSuccessful)
                     return@addOnCompleteListener
                 var date = Date()
@@ -80,5 +96,12 @@ class JapFragment:Fragment() {
                     date = word.lastOrNull()?.createdAt ?: Date()
                 }
             }
+    }
+
+    private fun deleteWord(itemView:AddWord){
+        FirebaseFirestore.getInstance()
+            .collection("word")
+            .document("${itemView.Japaneseword}")
+            .delete()
     }
 }

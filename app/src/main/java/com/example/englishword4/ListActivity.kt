@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.list_activity.*
 
-class ListActivity : AppCompatActivity() {
+class ListActivity : BaseActivity() {
 
     private val viewPagerAdapter by lazy { ViewPagerAdapter(this) }
 
@@ -19,12 +19,6 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.list_activity)
         initialize()
     }
-
-//    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-//        super.onCreate(savedInstanceState, persistentState)
-//        setContentView(R.layout.list_activity)
-//        initialize()
-
 
     private fun initialize() {
         initLayout()

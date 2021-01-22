@@ -1,5 +1,6 @@
 package com.example.englishword4
 
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
 
 class AddWord {
