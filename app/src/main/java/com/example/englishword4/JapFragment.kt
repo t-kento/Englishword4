@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_jpanese_list.*
 import java.nio.file.Files.delete
 import java.util.*
 
-class JapFragment:Fragment() {
+class JapFragment :Fragment() {
 
     private val japAdapter by lazy { JapAdapter(context!!) }
 
@@ -39,7 +39,6 @@ class JapFragment:Fragment() {
         initClick()
         initRecyclerView()
         initSwipeRefreshLayout()
-        getSwipeToDismissTouchHelpe()
     }
 
     private fun initClick(){
@@ -69,18 +68,12 @@ class JapFragment:Fragment() {
         }
     }
 
-    private fun getSwipeToDismissTouchHelpe(){
-        japAdapter.callback = object : JapAdapter.JapAdapterCallback{
-        }
-    }
-
-
-
-
-
-
     private fun initData() {
+        val addWord = AddWord().apply {
+
+        }
         FirebaseFirestore.getInstance()
+//            .collection(addWord.loginId)
             .collection("word")
             .orderBy(AddWord::createdAt.name)
             .get()
@@ -99,9 +92,11 @@ class JapFragment:Fragment() {
     }
 
     private fun deleteWord(itemView:AddWord){
+        val addWord = AddWord()
         FirebaseFirestore.getInstance()
+//            .collection(addWord.loginId)
             .collection("word")
-            .document("${itemView.Japaneseword}")
+            .document("${itemView.wordId}")
             .delete()
     }
 }

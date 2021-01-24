@@ -88,7 +88,7 @@ class EngFragment : Fragment() {
     private fun deleteWord(itemView:AddWord){
         FirebaseFirestore.getInstance()
             .collection("word")
-            .document("${itemView.Japaneseword}")
+            .document("${itemView.wordId}")
             .delete()
     }
 

@@ -9,14 +9,64 @@
     tools:context=".WordTest" >
 
     <TextView
+        android:id="@+id/Japanese_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Japaneseword" />
+        android:textSize="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="日本語問題" />
+
+    <TextView
+        android:id="@+id/English_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="30dp"
+        android:text="English_answer" />
+
     <Button
+        android:id="@+id/answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Japaneseword" />
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:text="答え" />
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@color/white"
+            android:text="×"
+            android:textSize="30dp">
+
+        </Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@color/white"
+            android:text="◯"
+            android:textSize="30dp">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

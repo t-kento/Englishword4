@@ -13,11 +13,13 @@ import kotlinx.android.synthetic.main.home.*
 import com.example.englishword4.BaseActivity as BaseActivity
 
 
-class MainActivity : BaseActivity(){
+class MainActivity : BaseActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
         click()
+        getid()
     }
 
     private fun click() {
@@ -31,10 +33,15 @@ class MainActivity : BaseActivity(){
         }
 
         test.setOnClickListener {
-
+            val wordTest = Intent(application, WordTest::class.java)
+            startActivity(wordTest)
         }
     }
 
-
-
+    private fun getid(){
+        val textidMain = intent.getStringExtra("TEXT_KEY_MAIN")
+        val className = findViewById<TextView>(R.id.classname) as TextView
+        className.text=textidMain.toString()
+    }
 }
+

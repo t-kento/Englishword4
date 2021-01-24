@@ -1,6 +1,8 @@
 package com.example.englishword4
 
 import android.app.AlertDialog
+import android.content.Intent
+import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,16 +31,26 @@ open class BaseActivity:AppCompatActivity() {
             .setNegativeButton("キャンセル") { _, _ -> }
             .show()
     }
+
     private fun addtext(japanese: String, english: String) {
+        val intentBaseActivity =  intent.getStringExtra("TEXT_KEY_BASE").toString()
+        println(intentBaseActivity)
+        val addWord = AddWord().apply {
+            loginId=intentBaseActivity
+            Japaneseword = japanese
+            Englishword = english
+        }
         FirebaseFirestore.getInstance()
-            .collection("word")
-            .document("${japanese}")
-            .set(AddWord().apply {
-                Japaneseword = japanese
-                Englishword = english
-                wordId = wordId
-            })
+            .collection("${intentBaseActivity}")
+            .document(addWord.wordId)
+            .set(addWord)
     }
-
-
+    internal fun logindocument(documentid:String){
+        val addWord = AddWord().apply {
+            loginId = "${documentid}が作られました"
+        }
+        FirebaseFirestore.getInstance()
+            .collection(documentid)
+            .add(addWord)
+    }
 }

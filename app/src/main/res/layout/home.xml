@@ -1,35 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="#EFDADA">
 
     <TextView
-        android:id="@+id/registration"
+        android:id="@+id/classname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:background="#AAFFE7"
-        android:text="単語登録"
-        android:textSize="30dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="クラス名"
+        android:textSize="50dp"></TextView>
 
     <TextView
-        android:id="@+id/wordlist"
+        android:id="@+id/text_view_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:background="#F49F36"
-        android:text="登録一覧"
+        android:layout_below="@+id/classname"
+        android:layout_centerHorizontal="true"
+        android:text="の単語帳へようこそ♪"
+        android:textColor="#D729B0D3"
         android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#E380E6"
-        android:text="暗記テスト"
-        android:textSize="30dp" />
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:backgroundTint="#ECC3EF">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:background="#AAFFE7"
+            android:text="単語登録"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/wordlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:background="#F49F36"
+            android:text="登録一覧"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#E380E6"
+            android:text="暗記テスト"
+            android:textSize="30dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
