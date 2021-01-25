@@ -92,10 +92,9 @@ class JapFragment :Fragment() {
     }
 
     private fun deleteWord(itemView:AddWord){
-        val addWord = AddWord()
         FirebaseFirestore.getInstance()
-//            .collection(addWord.loginId)
-            .collection("word")
+            .collection(itemView.loginId)
+//            .collection("word")
             .document("${itemView.wordId}")
             .delete()
     }
