@@ -35,8 +35,20 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:src="@drawable/ic_baseline_add_circle_24"
+            app:layout_constraintEnd_toStartOf="@id/tabDeleteButton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageButton
+            android:id="@+id/tabDeleteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:src="@drawable/ic_baseline_delete_forever_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        </ImageButton>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.tabs.TabLayout

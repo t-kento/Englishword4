@@ -48,7 +48,7 @@ class JapAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerV
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val number_text = view.number_text
         val edit_text = view.japanese_text
-        val deleteButton = view.deleteButton
+        val deleteButton = view.japDeleteButton
     }
 
     interface JapAdapterCallback {

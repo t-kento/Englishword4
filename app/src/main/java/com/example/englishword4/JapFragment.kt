@@ -11,11 +11,12 @@ import com.google.firebase.firestore.FieldValue.delete
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.util.FileUtil.delete
 import kotlinx.android.synthetic.main.fragment_jpanese_list.*
+import kotlinx.android.synthetic.main.item_jap_list.*
 import kotlinx.android.synthetic.main.login_view.*
 import java.nio.file.Files.delete
 import java.util.*
 
-class JapFragment :Fragment() {
+class JapFragment : Fragment() {
 
     private val japAdapter by lazy { JapAdapter(context!!) }
     private var words = listOf<AddWord>()
@@ -25,7 +26,8 @@ class JapFragment :Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return LayoutInflater.from(context).inflate(R.layout.fragment_jpanese_list, container, false)
+        return LayoutInflater.from(context)
+            .inflate(R.layout.fragment_jpanese_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,21 +41,10 @@ class JapFragment :Fragment() {
     }
 
     private fun initLayout() {
-//        initClick()
         initRecyclerView()
         initSwipeRefreshLayout()
     }
 
-//    private fun initClick(){
-//        fabJapanese.setOnClickListener{
-//            (activity as? BaseActivity)?.also{
-//                it.wordregistration()
-//            }
-//        }
-//        reJapanese.setOnClickListener{
-//            activity?.onBackPressed()
-//        }
-//    }
     private fun initRecyclerView() {
         japAdapter.callback = object : JapAdapter.JapAdapterCallback {
             override fun onClickDelete(itemView: AddWord) {
@@ -65,6 +56,7 @@ class JapFragment :Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
+
     private fun initSwipeRefreshLayout() {
         japSwipeRefreshLayout.setOnRefreshListener {
             initData()
@@ -72,35 +64,32 @@ class JapFragment :Fragment() {
     }
 
     private fun initData() {
-        var addWord=AddWord()
         FirebaseFirestore.getInstance()
             .collection("word")
-            .whereEqualTo(addWord.className,EnglishWordApplication.loginId)
             .orderBy(AddWord::createdAt.name)
+//            .whereEqualTo(AddWord::deletedAt,null)
             .get()
             .addOnCompleteListener {
                 japSwipeRefreshLayout.isRefreshing = false
                 if (!it.isSuccessful)
                     println("失敗しました")
-                    return@addOnCompleteListener
-                var date = Date()
+                return@addOnCompleteListener
+
                 it.result?.toObjects(AddWord::class.java)?.also { word ->
-//                   val recent = word.filter{it.createdAt.time > (System.currentTimeMillis()-7*24*60*60*1000L)}
-//                    println("$recent")
-                    words=word
-                    words.forEach{
-                        println("${it.Japaneseword}")
-                    }
-//                    japAdapter.refresh(word)
+//                    words=word
+                    japAdapter.refresh(word)
 //                    date = word.lastOrNull()?.createdAt ?: Date()
                 }
             }
     }
 
-    private fun deleteWord(itemView:AddWord){
+    private fun deleteWord(itemView: AddWord) {
         FirebaseFirestore.getInstance()
             .collection("word")
-            .document("${itemView.wordId}")
-            .delete()
+            .document(itemView.wordId)
+            .set(itemView.apply {
+                deletedAt = Date()
+            })
+        japDeleteButton.visibility = View.INVISIBLE
     }
 }

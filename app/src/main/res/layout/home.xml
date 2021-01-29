@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:textColor="@color/black"
         android:text="クラス名"
         android:textSize="50dp"></TextView>
 
@@ -39,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
+            android:textColor="@color/black"
             android:background="#AAFFE7"
             android:text="単語登録"
             android:textSize="30dp" />
@@ -48,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
+            android:textColor="@color/black"
             android:background="#F49F36"
             android:text="登録一覧"
             android:textSize="30dp" />
@@ -56,6 +59,7 @@
             android:id="@+id/test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:background="#E380E6"
             android:text="暗記テスト"
             android:textSize="30dp" />

@@ -1,6 +1,7 @@
 package com.example.englishword4
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -8,6 +9,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.home.*
+import kotlinx.android.synthetic.main.item_eng_list.*
+import kotlinx.android.synthetic.main.item_jap_list.*
 import kotlinx.android.synthetic.main.list_activity.*
 
 class ListActivity : BaseActivity() {
@@ -45,6 +48,13 @@ class ListActivity : BaseActivity() {
         fabRegistrationWord.setOnClickListener {
             wordregistration()
         }
+        tabDeleteButton.setOnClickListener {
+            initDeletebuttonVisibility()
+        }
+    }
+    private fun initDeletebuttonVisibility(){
+//        japDeleteButton.visibility= View.VISIBLE
+        engDeleteButton.visibility=View.VISIBLE
     }
 
     class Item(val fragment: Fragment, val language: String)

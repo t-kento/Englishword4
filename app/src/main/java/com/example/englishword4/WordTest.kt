@@ -6,6 +6,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.custom_view.*
 import kotlinx.android.synthetic.main.fragment_jpanese_list.*
 import kotlinx.android.synthetic.main.item_eng_list.*
 import kotlinx.android.synthetic.main.test_view.*
@@ -22,11 +23,11 @@ class WordTest : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.test_view)
-        getwords()
+        getWords()
         choice()
     }
 
-    private fun getwords() {
+    private fun getWords() {
         FirebaseFirestore.getInstance()
             .collection("word")
             .get()
@@ -35,6 +36,9 @@ class WordTest : AppCompatActivity() {
                     return@addOnCompleteListener
                 it.result?.toObjects(AddWord::class.java)?.also { word ->
                     words = word
+                    words.forEach{
+                        println("${it.Japaneseword}")
+                    }
                     getRandomWord()
                     intiTest()
                 }
@@ -48,7 +52,7 @@ class WordTest : AppCompatActivity() {
             finish()
             return
         }
-        English_answer.text=""
+        English_answer.visibility=View.INVISIBLE
         remainingword.clear()
         remainingword.addAll(words)
 
@@ -60,13 +64,11 @@ class WordTest : AppCompatActivity() {
             return null
         var randomIndex: Int = Random.nextInt(remainingword.size)
 
-        val japanese_test = findViewById<TextView>(R.id.Japanese_test) as TextView
-//        japanese_test.text = remainingword.Japaneseword
-
-
-        return remainingword.removeAt(randomIndex)
+//        var japanese_test = findViewById<TextView>(R.id.Japanese_test) as TextView
+////        japanese_test.text = remainingword.add(Japaneseword)
 
         intiTest()
+        return remainingword.removeAt(randomIndex)
     }
 
     private fun choice() {
@@ -76,10 +78,12 @@ class WordTest : AppCompatActivity() {
         correct.setOnClickListener {
             point++
             English_answer.text
+            buttonLayout.visibility=View.INVISIBLE
             intiTest()
         }
         incorrect.setOnClickListener {
             intiTest()
+            buttonLayout.visibility=View.INVISIBLE
         }
     }
 

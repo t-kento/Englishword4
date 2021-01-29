@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_eng_list.view.*
 import kotlinx.android.synthetic.main.item_jap_list.view.*
-import kotlinx.android.synthetic.main.item_jap_list.view.deleteButton
 import kotlinx.android.synthetic.main.item_jap_list.view.number_text
 
 class EngAdapter (private val context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -51,7 +50,7 @@ class EngAdapter (private val context: Context?) : RecyclerView.Adapter<Recycler
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val number_text = view.number_text
         val edit_text = view.English_text
-        val deleteButton = view.deleteButton
+        val deleteButton = view.engDeleteButton
     }
 
     interface EngAdapterCallback {

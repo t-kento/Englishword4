@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragmen_english_list.*
 import kotlinx.android.synthetic.main.fragment_jpanese_list.*
+import kotlinx.android.synthetic.main.item_eng_list.*
 import java.util.*
 
 class EngFragment : Fragment() {
@@ -90,6 +91,7 @@ class EngFragment : Fragment() {
             .collection("word")
             .document("${itemView.wordId}")
             .delete()
+        engDeleteButton.visibility=View.INVISIBLE
     }
 
 }
