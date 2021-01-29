@@ -33,24 +33,14 @@ open class BaseActivity:AppCompatActivity() {
     }
 
     private fun addtext(japanese: String, english: String) {
-        val intentBaseActivity =  intent.getStringExtra("TEXT_KEY_BASE").toString()
-        println(intentBaseActivity)
         val addWord = AddWord().apply {
-            loginId=intentBaseActivity
             Japaneseword = japanese
             Englishword = english
         }
         FirebaseFirestore.getInstance()
-            .collection("${intentBaseActivity}")
+            .collection("word")
             .document(addWord.wordId)
             .set(addWord)
     }
-    internal fun logindocument(documentid:String){
-        val addWord = AddWord().apply {
-            loginId = "${documentid}が作られました"
-        }
-        FirebaseFirestore.getInstance()
-            .collection(documentid)
-            .add(addWord)
-    }
+
 }

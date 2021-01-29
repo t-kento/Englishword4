@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_gravity="center_vertical"
-    tools:context=".WordTest" >
+    android:orientation="vertical"
+    tools:context=".WordTest">
 
     <TextView
         android:id="@+id/Japanese_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="30dp"
         android:layout_marginBottom="30dp"
-        android:text="日本語問題" />
+        android:text="日本語問題"
+        android:textSize="30dp" />
 
     <TextView
         android:id="@+id/English_answer"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="30dp"
-        android:text="English_answer" />
+        android:text="English_answer"
+        android:textSize="30dp" />
 
     <Button
         android:id="@+id/answer"
@@ -31,19 +31,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textSize="30dp"
-        android:text="答え" />
-
+        android:text="答え"
+        android:textSize="30dp" />
 
 
     <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
         android:layout_marginTop="30dp"
-        >
-
+        android:orientation="horizontal">
         <Button
             android:id="@+id/correct"
             android:layout_width="wrap_content"
@@ -52,9 +51,7 @@
             android:background="@color/white"
             android:text="×"
             android:textSize="30dp">
-
         </Button>
-
         <Button
             android:id="@+id/incorrect"
             android:layout_width="wrap_content"
@@ -63,12 +60,6 @@
             android:background="@color/white"
             android:text="◯"
             android:textSize="30dp">
-
         </Button>
-
-
     </LinearLayout>
-
-
-
 </LinearLayout>

@@ -12,15 +12,15 @@ import io.grpc.InternalLogId
 import kotlinx.android.synthetic.main.first_screen.*
 import kotlinx.android.synthetic.main.login_view.*
 
-class HomeActivity:BaseActivity() {
+class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.first_screen)
         intlogin()
     }
 
-    private fun intlogin(){
-        login.setOnClickListener{
+    private fun intlogin() {
+        login.setOnClickListener {
 
             val inflater = layoutInflater
             val inflate_view = inflater.inflate(R.layout.login_view, null)
@@ -32,34 +32,29 @@ class HomeActivity:BaseActivity() {
                 .setView(inflate_view)
                 .setPositiveButton("登録") { _, _ ->
                     val documentid = loginId.text.toString()
-                    logindocument(documentid)
-                    idtransferBase(documentid)
-                    idtransferMain(documentid)
+                    EnglishWordApplication.loginId = documentid
+                    startActivity(Intent(this, MainActivity::class.java))
+
                 }
                 .setNegativeButton("キャンセル") { _, _ -> }
                 .show()
         }
-        }
-
-    private fun idtransferMain(documentId: String){
-        val textMain = documentId
-        val intentMain = Intent(application, MainActivity::class.java)
-        //intent変数をつなげる(第一引数はキー，第二引数は渡したい変数)
-        intentMain.putExtra("TEXT_KEY_MAIN",textMain)
-        //画面遷移を開始
-        startActivity(intentMain)
-
     }
-    private fun idtransferBase(documentId: String){
-        val textBase = documentId
-        println("${textBase+1}")
-        println("${documentId+2}")
-        println(textBase+3)
-        println(documentId+4)
 
-        val intentBaseActivity = Intent(application, BaseActivity::class.java)
-        //intent変数をつなげる(第一引数はキー，第二引数は渡したい変数)
-        intentBaseActivity.putExtra("TEXT_KEY_BASE",textBase)
-
-    }
-    }
+//    private fun logindocument(documentid: String, onSuccess: () -> Unit, onFailure: () -> Unit) {
+////        val addWord = AddWord().apply {
+////            password = "false"
+////        }
+//        EnglishWordApplication.loginId = documentid
+//        FirebaseFirestore.getInstance()
+//            .collection("word")
+////            .add(addWord)
+////            .addOnCompleteListener {
+////                if (it.isSuccessful) {
+////                    onSuccess.invoke()
+////                } else {
+////                    onFailure.invoke()
+////                }
+////            }
+//    }
+}

@@ -34,21 +34,21 @@ class EngFragment : Fragment() {
     }
 
     private fun initLayout() {
-        initClick()
+//        initClick()
         initRecyclerView()
         initSwipeRefreshLayout()
     }
 
-    private fun initClick() {
-        fabEnglish.setOnClickListener {
-            (activity as? BaseActivity)?.also {
-                it.wordregistration()
-            }
-        }
-        reEnglish.setOnClickListener {
-            activity?.onBackPressed()
-        }
-    }
+//    private fun initClick() {
+//        fabEnglish.setOnClickListener {
+//            (activity as? BaseActivity)?.also {
+//                it.wordregistration()
+//            }
+//        }
+//        reEnglish.setOnClickListener {
+//            activity?.onBackPressed()
+//        }
+//    }
 
     private fun initRecyclerView() {
         engAdapter.callback = object : EngAdapter.EngAdapterCallback {
