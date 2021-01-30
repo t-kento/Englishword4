@@ -44,17 +44,27 @@ class ListActivity : BaseActivity() {
             tab.text = viewPagerAdapter.items[position].language
         }.attach()
     }
-    private fun intRegistration(){
+
+    private fun intRegistration() {
         fabRegistrationWord.setOnClickListener {
             wordregistration()
         }
         tabDeleteButton.setOnClickListener {
-            initDeletebuttonVisibility()
+            initJapaneseDeleteButtonVisibility()
+            initEnglishDeleteButtonVisibility()
         }
     }
-    private fun initDeletebuttonVisibility(){
-//        japDeleteButton.visibility= View.VISIBLE
-        engDeleteButton.visibility=View.VISIBLE
+
+    private fun initJapaneseDeleteButtonVisibility() {
+        viewPagerAdapter.items.forEach {
+            (it.fragment as? JapFragment)?.changeDeleteButton()
+        }
+    }
+
+    private fun initEnglishDeleteButtonVisibility() {
+        viewPagerAdapter.items.forEach {
+            (it.fragment as? EngFragment)?.changeDeleteButton()
+        }
     }
 
     class Item(val fragment: Fragment, val language: String)

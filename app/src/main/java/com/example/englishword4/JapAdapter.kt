@@ -13,6 +13,13 @@ class JapAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerV
 
     var callback: JapAdapterCallback? = null
 
+    var isShowDeleteButton = false
+
+    fun changeDeleteButton (){
+        isShowDeleteButton = ! isShowDeleteButton
+        notifyDataSetChanged()
+    }
+
     fun refresh(list: List<AddWord>) {
         items.apply {
             clear()
@@ -37,6 +44,7 @@ class JapAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerV
         holder.apply {
             number_text.text = "${position + 1}"
             edit_text.text = itemView.Japaneseword
+            deleteButton.visibility=if(isShowDeleteButton) View.VISIBLE else View.INVISIBLE
             deleteButton.setOnClickListener {
                 callback?.onClickDelete(itemView)
             }

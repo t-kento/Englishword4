@@ -12,6 +12,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="25dp"
+        android:textColor="@color/black"
         android:text="みんなで作る単語帳！"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="32dp" />
@@ -23,6 +24,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="25dp"
         android:background="#AAFFE7"
+        android:textColor="@color/black"
         android:text="ログイン"
         android:textSize="30dp" />
 

@@ -35,21 +35,9 @@ class EngFragment : Fragment() {
     }
 
     private fun initLayout() {
-//        initClick()
         initRecyclerView()
         initSwipeRefreshLayout()
     }
-
-//    private fun initClick() {
-//        fabEnglish.setOnClickListener {
-//            (activity as? BaseActivity)?.also {
-//                it.wordregistration()
-//            }
-//        }
-//        reEnglish.setOnClickListener {
-//            activity?.onBackPressed()
-//        }
-//    }
 
     private fun initRecyclerView() {
         engAdapter.callback = object : EngAdapter.EngAdapterCallback {
@@ -68,11 +56,16 @@ class EngFragment : Fragment() {
             initData()
         }
     }
+    fun changeDeleteButton (){
+        engAdapter.changeDeleteButton()
+    }
 
     private fun initData() {
         FirebaseFirestore.getInstance()
             .collection("word")
             .orderBy(AddWord::createdAt.name)
+            .whereEqualTo(AddWord::deletedAt.name,null)
+            .whereEqualTo(AddWord::className.name,EnglishWordApplication.loginId)
             .get()
             .addOnCompleteListener {
                 engSwipeRefreshLayout.isRefreshing = false
@@ -90,8 +83,9 @@ class EngFragment : Fragment() {
         FirebaseFirestore.getInstance()
             .collection("word")
             .document("${itemView.wordId}")
-            .delete()
-        engDeleteButton.visibility=View.INVISIBLE
+            .set(itemView.apply {
+                deletedAt = Date()
+            })
     }
 
 }

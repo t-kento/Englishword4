@@ -63,22 +63,25 @@ class JapFragment : Fragment() {
         }
     }
 
+    fun changeDeleteButton (){
+        japAdapter.changeDeleteButton()
+    }
+
     private fun initData() {
         FirebaseFirestore.getInstance()
             .collection("word")
             .orderBy(AddWord::createdAt.name)
-//            .whereEqualTo(AddWord::deletedAt,null)
+            .whereEqualTo(AddWord::deletedAt.name,null)
+            .whereEqualTo(AddWord::className.name,EnglishWordApplication.loginId)
             .get()
             .addOnCompleteListener {
                 japSwipeRefreshLayout.isRefreshing = false
-                if (!it.isSuccessful)
+                if (!it.isSuccessful) {
                     println("失敗しました")
-                return@addOnCompleteListener
-
+                    return@addOnCompleteListener
+                }
                 it.result?.toObjects(AddWord::class.java)?.also { word ->
-//                    words=word
                     japAdapter.refresh(word)
-//                    date = word.lastOrNull()?.createdAt ?: Date()
                 }
             }
     }
@@ -90,6 +93,5 @@ class JapFragment : Fragment() {
             .set(itemView.apply {
                 deletedAt = Date()
             })
-        japDeleteButton.visibility = View.INVISIBLE
     }
 }

@@ -9,11 +9,18 @@ import kotlinx.android.synthetic.main.item_eng_list.view.*
 import kotlinx.android.synthetic.main.item_jap_list.view.*
 import kotlinx.android.synthetic.main.item_jap_list.view.number_text
 
-class EngAdapter (private val context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class EngAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val items = mutableListOf<AddWord>()
 
     var callback: EngAdapterCallback? = null
+
+    var isShowDeleteButton = false
+
+    fun changeDeleteButton (){
+        isShowDeleteButton = ! isShowDeleteButton
+        notifyDataSetChanged()
+    }
 
     fun refresh(list: List<AddWord>) {
         items.apply {
@@ -37,8 +44,9 @@ class EngAdapter (private val context: Context?) : RecyclerView.Adapter<Recycler
     private fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val itemView = items[position]
         holder.apply {
-            number_text.text="${position+1}"
+            number_text.text = "${position + 1}"
             edit_text.text = itemView.Englishword
+            deleteButton.visibility=if(isShowDeleteButton) View.VISIBLE else View.INVISIBLE
             deleteButton.setOnClickListener {
                 callback?.onClickDelete(itemView)
             }
